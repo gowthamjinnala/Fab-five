@@ -69,5 +69,5 @@ Integration with local police stations
 ├── /services            # Location, Alerts, API handling
 ├── /components          # Reusable UI components
 ├── /utils               # Helper functions
-├── main.dart / App.js   # Entry point
+├── main.dart            # Entry point
 └── README.md            # Project Documentation
