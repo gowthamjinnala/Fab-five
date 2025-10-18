@@ -51,6 +51,8 @@ flutter run
 
 🔐 Demo Credentials
 
+Name : Fabfive
+
 Phone Number: 9876543210
 
 Password: safe1234
@@ -254,7 +256,7 @@ Submit PR
 
 
 👥 Team
-Project: Raksha Sathi
+Project: Guardian stride
 Event: Smart India Hackathon 2025
 Focus: Real-time Personal Safety
 
