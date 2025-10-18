@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety App - Interactive Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-shield-alt header-icon"></i>
+                    <h1>Women Safety App</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="contactsBtn">
+                        <i class="fas fa-address-book"></i>
+                    </button>
+                    <button class="icon-btn" id="settingsBtn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Safety Status Card -->
+            <div class="card safety-status-card" id="safetyStatusCard">
+                <div class="card-header">
+                    <div class="status-indicator" id="statusIndicator">
+                        <div class="status-dot"></div>
+                        <span id="statusText">INACTIVE</span>
+                    </div>
+                    <button class="toggle-btn" id="monitoringToggle">Start Monitoring</button>
+                </div>
+                <div class="status-details">
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="locationText">Getting location...</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-microphone"></i>
+                        <span id="recordingStatus">Not Recording</span>
+                    </div>
+                    <div class="sensor-indicators">
+                        <div class="sensor-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Accelerometer</span>
+                            <div class="sensor-status" id="accelStatus"></div>
+                        </div>
+                        <div class="sensor-item">
+                            <i class="fas fa-compass"></i>
+                            <span>Gyroscope</span>
+                            <div class="sensor-status" id="gyroStatus"></div>
+                        </div>
+                        <div class="sensor-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>GPS</span>
+                            <div class="sensor-status" id="gpsStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anomaly Detector Card -->
+            <div class="card anomaly-detector-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-brain"></i> AI Anomaly Detection</h3>
+                    <div class="confidence-meter">
+                        <div class="meter-label">Risk Level</div>
+                        <div class="meter-bar">
+                            <div class="meter-fill" id="riskMeter"></div>
+                        </div>
+                        <div class="meter-value" id="riskValue">0%</div>
+                    </div>
+                </div>
+                <div class="sensor-visualization">
+                    <div class="waveform-container">
+                        <canvas id="sensorWaveform" width="300" height="100"></canvas>
+                    </div>
+                    <div class="pattern-info">
+                        <div class="pattern-item">
+                            <span>Walking Pattern:</span>
+                            <span id="walkingPattern">Normal</span>
+                        </div>
+                        <div class="pattern-item">
+                            <span>Confidence:</span>
+                            <span id="confidenceLevel">95%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Grid -->
+            <div class="card quick-actions-card">
+                <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                <div class="actions-grid">
+                    <button class="action-btn" id="shareLocationBtn">
+                        <i class="fas fa-share-location"></i>
+                        <span>Share Location</span>
+                    </button>
+                    <button class="action-btn" id="voiceNoteBtn">
+                        <i class="fas fa-microphone"></i>
+                        <span>Voice Note</span>
+                    </button>
+                    <button class="action-btn" id="emergencyContactBtn">
+                        <i class="fas fa-phone"></i>
+                        <span>Emergency Contact</span>
+                    </button>
+                    <button class="action-btn" id="safetyTipsBtn">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Safety Tips</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Safety Tips Card -->
+            <div class="card safety-tips-card">
+                <h3><i class="fas fa-lightbulb"></i> Safety Tips</h3>
+                <div class="tip-content">
+                    <div class="tip-text" id="currentTip">
+                        Always stay alert and trust your instincts. If something feels wrong, it probably is.
+                    </div>
+                    <div class="tip-navigation">
+                        <button class="tip-btn" id="prevTipBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="tip-counter" id="tipCounter">1 / 5</span>
+                        <button class="tip-btn" id="nextTipBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Controls -->
+            <div class="card demo-controls-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-flask"></i> Demo Controls</h3>
+                    <button class="expand-btn" id="expandDemoBtn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="demo-content" id="demoContent" style="display: none;">
+                    <div class="demo-buttons">
+                        <button class="demo-btn danger" id="simulateAnomalyBtn">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Simulate Anomaly</span>
+                            <small>Trigger anomaly detection</small>
+                        </button>
+                        <button class="demo-btn success" id="simulateNormalBtn">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Normal Pattern</span>
+                            <small>Reset to normal</small>
+                        </button>
+                        <button class="demo-btn warning" id="showAlertBtn">
+                            <i class="fas fa-bell"></i>
+                            <span>Safety Alert</span>
+                            <small>Show notification</small>
+                        </button>
+                    </div>
+                    <div class="demo-info">
+                        <i class="fas fa-info-circle"></i>
+                        <span>These controls simulate real sensor data for demonstration purposes.</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Emergency Button -->
+        <div class="emergency-button-container">
+            <button class="emergency-btn" id="emergencyBtn">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>EMERGENCY</span>
+            </button>
+        </div>
+
+        <!-- Notifications -->
+        <div class="notification-container" id="notificationContainer"></div>
+
+        <!-- Modal for Emergency Contacts -->
+        <div class="modal" id="contactsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Emergency Contacts</h3>
+                    <button class="close-btn" id="closeContactsBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="contact-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-name">Emergency Services</div>
+                                <div class="contact-number">911</div>
+                            </div>
+                            <button class="call-btn">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-name">Family Member</div>
+                                <div class="contact-number">+1 (555) 123-4567</div>
+                            </div>
+                            <button class="call-btn">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-name">Trusted Friend</div>
+                                <div class="contact-number">+1 (555) 987-6543</div>
+                            </div>
+                            <button class="call-btn">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
