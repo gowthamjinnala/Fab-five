@@ -256,8 +256,9 @@ Submit PR
 
 
 👥 Team
+
 Project: Guardian stride
-Event: Smart India Hackathon 2025
+
 Focus: Real-time Personal Safety
 
 📞 Support
